@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customized T-Shirt Order Form</title>
     <style>
-       
         body {
             font-family: Arial, sans-serif;
         }
@@ -33,7 +32,7 @@
 </head>
 <body>
     <h1>Customized T-Shirt Order Form</h1>
-    <form action="/submit_order" method="post">
+    <form action="javascript:void(0);" onsubmit="return validateForm()">
         <label for="tagline">Tagline on the Shirt:</label>
         <input type="text" id="tagline" name="tagline" required>
 
@@ -43,7 +42,6 @@
             <option value="red">Red</option>
             <option value="blue">Blue</option>
             <option value="green">Green</option>
-           
         </select>
 
         <label for="size">Size:</label>
@@ -52,7 +50,6 @@
             <option value="s">Small</option>
             <option value="m">Medium</option>
             <option value="l">Large</option>
-            
         </select>
 
         <label for="quantity">Quantity:</label>
@@ -76,7 +73,49 @@
             <input type="tel" id="phone" name="phone" required>
         </fieldset>
 
-        <button type="submit">Place Order</button>
+        <button type="submit" onclick="processOrder()">Place Order</button>
     </form>
+
+    <script>
+        function validateForm() {
+            var phone = document.getElementById('phone').value;
+            if (phone.length !== 9) {
+                alert('Please enter a valid 9-digit phone number');
+                return false;
+            }
+            return true;
+        }
+
+        function processOrder() {
+            var receipt = 'Order Confirmation\n';
+            receipt += 'Date: ' + new Date().toLocaleString() + '\n';
+            alert(receipt);
+        }
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            displayDetails = () => {
+                console.log(`Name: ${this.name}, Age: ${this.age}`);
+            };
+        }
+
+        class Student extends Person {
+            constructor(name, age, rollNo) {
+                super(name, age);
+                if (rollNo === 0) {
+                    throw new Error('Roll number cannot be zero');
+                }
+                this.rollNo = rollNo;
+            }
+
+            displayDetails = () => {
+                console.log(`Name: ${this.name}, Age: ${this.age}, Roll No: ${this.rollNo}`);
+            };
+        }
+    </script>
 </body>
 </html>
